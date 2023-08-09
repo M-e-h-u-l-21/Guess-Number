@@ -4,13 +4,14 @@ function Title({children}){
 }
 const styles=StyleSheet.create({
     title:{
+        fontFamily:'open-sans-bold',
         fontSize:24,
         fontWeight:'bold',
         color:"white",
         textAlign:'center',
         borderWidth:3,
         borderColor:"white",
-        padding:12
+        padding:12,
       }
 })
 export default Title;
