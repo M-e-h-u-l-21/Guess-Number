@@ -1,20 +1,57 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  SafeAreaView,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useState } from "react";
 import StartGameScreen from "./screens/StartGameScreen";
+import GameScreen from "./screens/GameScreen";
+import GameOverScreen from "./screens/GameOverScreen";
+import { useFonts } from "expo-font";
 
 export default function App() {
+  const [userNumber, setUserNumber] = useState();
+  const [gameIsOver, setGameIsOver] = useState(true);
+
+  useFonts({
+    'open-sans':require('./assets/fonts/OpenSans-Regular.ttf')
+  })
+  function pickedNumberHandler(pickedNumber) {
+    setUserNumber(pickedNumber);
+    setGameIsOver(false);
+  }
+  function gameOverHandler() {
+    setGameIsOver(true);
+  }
+  let screen = <StartGameScreen onPick={pickedNumberHandler} />;
+  if (userNumber) {
+    screen = (
+      <GameScreen chosenNumber={userNumber} onGameOver={gameOverHandler} />
+    );
+  }
+
+  if (gameIsOver && userNumber) {
+    screen = <GameOverScreen />;
+  }
+
   return (
-    <LinearGradient colors={["#4e0329","#ddb52f"]} style={styles.rootLayout}>
-      <ImageBackground
-        source={require("./assets/background.png")}
-        resizeMode="cover"
-        style={styles.rootLayout}
-        imageStyle={styles.backgroundImage}
-      >
-        <StartGameScreen />
-      </ImageBackground>
-    </LinearGradient>
+    <>
+      <StatusBar style="light" />
+      <LinearGradient colors={["#4e0329", "#ddb52f"]} style={styles.rootLayout}>
+        <ImageBackground
+          source={require("./assets/background.png")}
+          resizeMode="cover"
+          style={styles.rootLayout}
+          imageStyle={styles.backgroundImage}
+        >
+          <SafeAreaView style={styles.rootLayout}>{screen}</SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 
@@ -22,7 +59,7 @@ const styles = StyleSheet.create({
   rootLayout: {
     flex: 1,
   },
-  backgroundImage:{
-    opacity:0.25
-  }
+  backgroundImage: {
+    opacity: 0.25,
+  },
 });
