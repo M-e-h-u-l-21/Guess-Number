@@ -10,12 +10,15 @@ function StartGameScreen({onPick}) {
   const [enteredNumber, setEnteredNumber] = useState("");
 
   function numHandler(enteredText) {
+    console.log("Num handler from startgamescreen.js");
     setEnteredNumber(enteredText);
   }
   function resetInput() {
+    console.log("Reset input from startgamescreen.js");
     setEnteredNumber("");
   }
   function confirmInput() {
+    console.log("Confirm input from startgamescreen.js");
     const chosenNumber = parseInt(enteredNumber);
 
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
@@ -27,7 +30,9 @@ function StartGameScreen({onPick}) {
     onPick(chosenNumber);
   }
 
+  console.log("Start gamescreen.js mein");
   return (
+    <>
     <View style={styles.rootContainer}>
       <Title > Guess My Number</Title>
     <Card >
@@ -49,6 +54,7 @@ function StartGameScreen({onPick}) {
       </View>
     </Card>
     </View>
+    </>
   );
 }
 

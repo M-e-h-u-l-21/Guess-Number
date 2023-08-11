@@ -8,6 +8,7 @@ import NumberContainer from "../components/game/NumberContainer";
 import InstructionText from "../components/ui/InstructionText";
 import GuessLogItem from "../components/game/GuessLogItem";
 function generateRandomBetween(min, max, exclude) {
+  console.log("GenerateRandomBetween function mein");
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
   // console.log("inside it");
 
@@ -28,11 +29,13 @@ function GameScreen({ chosenNumber, onGameOver }) {
 
   useEffect(() => {
     if (currentGuess === chosenNumber) {
+      console.log("if condition in useeffect current guess==chosen number");
       onGameOver(guessRounds.length);
     }
   }, [currentGuess, chosenNumber, onGameOver]);
 
   useEffect(() => {
+    console.log("Use effect for minboundary=1 and maxBoundary=100");
     (minBoundary = 1), (maxBoundary = 100);
   }, []);
 
@@ -41,6 +44,7 @@ function GameScreen({ chosenNumber, onGameOver }) {
       (direction === "lower" && currentGuess < chosenNumber) ||
       (direction === "upper" && currentGuess > chosenNumber)
     ) {
+      console.log("Wrong input from gamescreen.js");
       Alert.alert("Don't lie!!", "You know that this is wrong....", [
         { text: "Sorry!", style: "cancel" },
       ]);
@@ -62,7 +66,9 @@ function GameScreen({ chosenNumber, onGameOver }) {
 
   const guessRoundsListLength = guessRounds.length;
 
+  console.log("Game screen.js mein");
   return (
+    <>
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
@@ -97,6 +103,7 @@ function GameScreen({ chosenNumber, onGameOver }) {
         />
       </View>
     </View>
+    </>
   );
 }
 
@@ -107,6 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 24,
     padding: 24,
+    alignItems:'center'
   },
   buttonsContainer: {
     flexDirection: "row",

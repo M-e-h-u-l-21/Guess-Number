@@ -28,27 +28,33 @@ export default function App() {
     return <AppLoading/>
   }
   function pickedNumberHandler(pickedNumber) {
+    console.log("Pickednumber handler mein");
     setUserNumber(pickedNumber);
     setGameIsOver(false);
   }
   function gameOverHandler(numberOfROunds) {
+    console.log("Game over handler mein")
     setGameIsOver(true);
     setGuessRounds(numberOfROunds)
   }
 
   function startNewGameHandler(){
+    console.log("Start new game handler mein");
     setUserNumber(null);
     setGuessRounds(0);
   }
-
+  
+  console.log("App.js mein"); 
   let screen = <StartGameScreen onPick={pickedNumberHandler} />;
   if (userNumber) {
+    console.log("If username condition from app.js")
     screen = (
       <GameScreen chosenNumber={userNumber} onGameOver={gameOverHandler} />
     );
   }
 
   if (gameIsOver && userNumber) {
+    console.log("Game is over && usernumber from app.js");
     screen = <GameOverScreen userNumber={userNumber} roundNumber={guessRounds} onStartNewGame={startNewGameHandler}/>;
   }
 

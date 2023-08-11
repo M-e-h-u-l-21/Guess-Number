@@ -3,6 +3,7 @@ import Colors from "../constants/colors";
 import Title from "../components/ui/Title";
 import PrimaryButton from "../components/ui/PrimaryButton"
 function GameOverScreen({roundNumber,userNumber,onStartNewGame}) {
+     console.log("Game over .js mein"); 
   return (
     <>
       <View style={styles.mainContainer}>
